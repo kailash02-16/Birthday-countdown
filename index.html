@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>FOR YOU🤍</title>
+        <link rel="icon" href="code1icon.png">
+
+        <style>
+            *{
+                margin:0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Poppins", Arial, sans-serif;
+                color: white;
+                overflow:hidden;
+
+                /* Colorful gradient background */
+                background: linear-gradient(
+                    135deg,
+                    #ff0080,
+                    #7928ca,
+                    #2afadf,
+                    #4facfe
+                );
+                background-size: 400% 400%;
+                animation: gradientBG 10s ease infinite;
+            }
+
+            @keyframes gradientBG{
+                0%   { background-position: 0% 50%}
+                50%  { background-position: 100% 50%}
+                100% { background-position: 0% 50%}
+            }
+
+            /* Floating circles */
+            .circle{
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(2px);
+                opacity: 0.4;
+                animation: float 8s infinite ease-in-out;
+            }
+            .circle1{
+                width: 180px;
+                height: 180px;
+                background: #ffeb3b;
+                top: 10%;
+                left: 10%;
+            }
+            .circle2{
+                width: 250px;
+                height: 250px;
+                background: #ff4081;
+                bottom: -50px;
+                right: 5%;
+                animation-delay: 2s;
+            }
+            .circle3{
+                width: 120px;
+                height: 120px;
+                background: #00e5ff;
+                top: 60%;
+                left: 5%;
+                animation-delay: 4s;
+            }
+            @keyframes float{
+                0%, 100%{
+                    transform: translateY(0) rotate(0deg);
+                }
+                50%{
+                    transform: translateY(-30px) rotate(20deg);
+                }
+            }
+
+            .container{
+                position: relative;
+                z-index: 2;
+                width: 90%;
+                max-width: 850px;
+                padding: 50px 20px;
+                text-align: center;
+
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255,255,255,0.3);
+                border-radius: 30px;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+
+                box-shadow:
+                  0 25px 60px rgba(0,0,0,0.25);
+
+            }
+            .emoji{
+                font-size: 70px;
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce{
+                0%, 100%{
+                    transform: translateY(0);
+                }
+                50%{
+                    transform: translateY(-15px);
+                }
+            }
+            h1{
+                margin-top: 10px;
+                font-size: clamp(35px, 7vw, 70px);
+                font-weight: 800;
+                text-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            }
+            .subtitle{
+                margin: 10px 0 35px;
+                font-size: 18px;
+                opacity: 0.9;
+            }
+            .countdown{
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+            .time-box{
+                padding: 25px 10px;
+                border-radius: 20px;
+
+                background: linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.3),
+                    rgba(255,255,255,0.08)
+                );
+
+                border: 1px solid rgba(255,255,255,0.3);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+                transition: 0.3s;
+            }
+            .time-box:hover{
+                transform: translateY(-8px) scale(1.03);
+                background: rgba(255,255,255,0.25);
+            }
+
+            .number{
+                display: block;
+                font-size: clamp(35px, 6vw, 60px);
+                font-weight: 800;
+                color: #fff;
+                text-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            }
+
+            .label{
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                opacity: 0.85;
+            }
+
+            #birthdayMessage{
+                display: none;
+                margin-top: 30px;
+                font-size: clamp(18px, 5vw, 35px);
+                font-weight: lighter;
+                color: #eeece7;
+                text-shadow: 0 0 20px #efeded;
+                animation: celebration 1s infinite alternate;
+                
+            }
+
+            @keyframes celebration{
+                from{
+                    transform: scale(1);
+                }
+                to{
+                    transform: scale(1.08);
+                }
+            }
+
+            .date{
+                margin-top: 30px;
+                font-size: 15px;
+                opacity: 0.8;
+            }
+
+            @media(max-width: 600px){
+                .container{
+                    padding: 35px 15px;
+                }
+
+                .countdown{
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .emoji{
+                    font-size: 55px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Decorative circles -->
+         <div class="circle circle1"></div>
+         <div class="circle circle2"></div>
+         <div class="circle circle3"></div>
+
+         <div class="container">
+
+            <div class="emoji">🎂</div>
+
+            <h1>Birthday gift</h1>
+
+            <p class="subtitle">
+                Get ready for the special day brow! 🎉✨
+            </p>
+
+            <div class="countdown" id="countdown">
+
+                <div class="time-box">
+                    <span class="number" id="days">00</span>
+                    <span class="label">Days</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">Hours</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">Minutes</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+
+            <div id="birthdayMessage">
+                <a href="file:///C:/Users/KAILASH/OneDrive/Documents/BIRTHDAY/code2.html">Click here</a>
+            </div>
+
+            <P class="date">
+                Your special day is coming!💖
+            </P>
+         </div>
+
+         <script>
+
+            const birthdayDate = new Date("2026-10-16T00:00:00").getTime();
+
+            function updateCountdown(){
+
+                const now = new Date().getTime();
+
+                const distance = birthdayDate - now;
+
+                //Birthday has arrived
+                if(distance <= 0){
+
+                    document.getElementById("countdown").style.display = "none";
+
+                    document.getElementById("birthdayMessage").style.display = "block";
+
+                    return;
+                }
+
+                //Calculate time
+                const days = Math.floor(
+                    distance / (1000 * 60 * 60 * 24)
+                );
+
+                const hours = Math.floor(
+                    (distance % (1000 * 60 * 60 * 24))
+                    /(1000 * 60 * 60)
+                );
+                
+                const minutes = Math.floor(
+                    (distance % (1000 * 60 * 60))
+                    /(1000 * 60)
+                );
+                const seconds = Math.floor(
+                    (distance % (1000 * 60))
+                    / 1000
+                );
+
+                //Display Countdown
+                document.getElementById("days").textContent =
+                String(days).padStart(2,"0");
+
+                document.getElementById("hours").textContent = 
+                String(hours).padStart(2,"0");
+
+                document.getElementById("minutes").textContent =
+                String(minutes).padStart(2,"0");
+
+                document.getElementById("seconds").textContent =
+                String(seconds).padStart(2,"0");
+                
+            }
+
+            //Update immediately
+            updateCountdown();
+
+            //Update every second
+            setInterval(updateCountdown, 1000);
+         </script>
+
+
+    </body>
+
+
+
+
+</html>
